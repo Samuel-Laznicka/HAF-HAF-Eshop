@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="cz">
+<body>
+<!--Produkty v košíku-->
+<li th:fragment="cartItem(product, quantity)" class="cart-item">
+    <img th:src="${product.categoryImage}" alt="Produkt v košíku" class="cart-item-image" />
+
+    <div class="cart-item-info">
+        <div class="cart-item-top">
+            <h3 th:text="${product.name}"></h3>
+
+            <!--Cena se slevou-->
+            <div class="cart-price-section">
+
+                <!--Pokud sleva-->
+                <span th:if="${product.onSale}"
+                      class="cart-original-price"
+                      th:text="${product.price} + ' bodů/ks'">
+                    </span>
+
+                <!--Finální cena za kus-->
+                <p class="cart-price"
+                   th:text="${product.discountedPrice} + ' bodů/ks'">
+                </p>
+
+                <!--Label se slevou-->
+                <span th:if="${product.onSale}"
+                      class="cart-discount-badge"
+                      th:text="'-' + ${product.discount} + '%'">
+                    </span>
+            </div>
+
+            <p class="quantity" th:text="'Množství: ' + ${quantity} + ' ks'"></p>
+
+            <!--Celková cena za položku-->
+            <p class="item-total"
+               th:text="'Celkem: ' + ${product.discountedPrice * quantity} + ' bodů'">
+            </p>
+        </div>
+
+        <p class="details" th:text="${product.description}"></p>
+
+        <div class="cart-item-bottom">
+
+            <!--Odebrat produkt z košíku-->
+            <form th:action="@{/cart/remove/{id}(id=${product.id})}" method="post" style="display:inline;">
+                <button type="submit" class="btn-negative">Odebrat produkt</button>
+            </form>
+
+            <!--Přidat jeden kus-->
+            <form th:action="@{/cart/add/{id}(id=${product.id})}" method="post" style="display:inline;">
+                <button type="submit" class="btn-positive">Přidat jeden kus</button>
+            </form>
+
+            <!--Odebrat jeden kus-->
+            <form th:action="@{/cart/remove-one/{id}(id=${product.id})}" method="post" style="display:inline;">
+                <button type="submit" class="btn-negative">Odebrat jeden kus</button>
+            </form>
+        </div>
+    </div>
+</li>
+</body>
+</html>

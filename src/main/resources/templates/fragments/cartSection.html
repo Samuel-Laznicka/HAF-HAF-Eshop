@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="cz">
+<body>
+    <!--Sekce košíku-->
+    <div th:fragment="cartSection">
+
+        <!--Pokud je košík prázdný-->
+        <div th:if="${#maps.isEmpty(cartItems)}" class="empty">
+            <h3>Košík je prázdný</h3>
+            <p>Vraťte se na E-shop a nakupujte s radostí!</p>
+            <form action="/" method="get">
+                <button type="submit" class="btn-positive">Zpět na hlavní stránku</button>
+            </form>
+        </div>
+
+        <!--Pokud jsou produkty v košíku-->
+        <div th:unless="${#maps.isEmpty(cartItems)}">
+            <section class="cart-items">
+                <ul>
+                    <div th:each="item : ${cartItems}" th:if="${item != null && item.key != null}">
+                        <div th:replace="~{fragments/cartItem :: cartItem(product=${item.key}, quantity=${item.value})}"></div>
+                    </div>
+                </ul>
+            </section>
+
+            <!--Shrnutí košíku-->
+            <section class="cart-summary">
+                <div class="summary-line">
+                    <p>Cena Celkem:</p>
+                    <p class="price" th:text="${totalPrice} + ' bodů'"></p>
+
+                    <!--Akce v košíku-->
+                    <button class="btn-negative" onclick="openDeleteCartPopup()">Vyprázdnit košík</button>
+                    <button class="btn-positive"
+                            th:onclick="'openPaymentPopup(' + ${totalPrice} + ', ' + ${user != null ? user.points : 0} + ')'">
+                        Dokončit nákup
+                    </button>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

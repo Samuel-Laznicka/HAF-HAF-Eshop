@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="cz">
+<body>
+    <!--Sekce produktů-->
+    <div th:fragment="productsSection" class="container">
+        <h2 class="sr-only">Psí produkty</h2>
+        <br>
+
+        <!--Grid produktů-->
+        <div class="product-grid" th:if="${!#lists.isEmpty(products)}">
+            <div th:each="product : ${products}" class="product-card">
+                <div th:replace="~{fragments/productCard :: productCard(product=${product})}"></div>
+            </div>
+        </div>
+
+        <!--Prázdný eshop-->
+        <div th:if="${#lists.isEmpty(products)}" class="no-products">
+            <h3>Nenalezeny žádné produkty</h3>
+            <p>Zkuste si stránku zobrazit později než zboží naskladníme.</p>
+            <form action="/" method="get">
+                <button type="submit" class="btn-positive">Restartovat stránku!</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="cz">
+<body>
+    <!--Hlavička stránek-->
+    <header th:fragment="navigation" class="site-header">
+        <nav class="navbar" aria-label="Global">
+
+            <!--Levá strana: Logo-->
+            <div class="nav-left">
+                <a href="/" class="logo">
+                    <img src="/images/logo.png" alt="Logo" />
+                    <span>HAF HAF E-shop</span>
+                </a>
+            </div>
+
+            <!--Střed: Stránky-->
+            <div class="nav-center">
+
+                <!--uživatel JE přihlášený-->
+                <div th:if="${user != null}">
+                    <a class="links" href="/">Hlavní strana</a>
+                    <a class="links" href="/cart">Košík</a>
+                    <a class="links" th:href="@{/user}">Můj profil</a>
+                </div>
+
+                <!--uživatel NENÍ přihlášený-->
+                <div th:if="${user == null}">
+                    <a class="links" href="/">Hlavní strana</a>
+                    <a class="links" onclick="openPopup('login')">Košík</a>
+                    <a class="links" onclick="openPopup('login')">Můj profil</a>
+                </div>
+            </div>
+
+            <!--Pravá strana: Přihlášení / Registrace / Logout / body-->
+            <div class="nav-right">
+                <div th:if="${user == null}">
+                    <button class="btn-general" onclick="openPopup('login')">Přihlásit se</button>
+                    <button class="btn-general" onclick="openPopup('register')">Registrovat se</button>
+                </div>
+
+                <div th:if="${user != null}" class="user-logged">
+                    <form action="/logout" method="post" style="display:inline;">
+                        <button type="submit" class="btn-general">Odhlásit se</button>
+                    </form>
+
+                    <div class="user-info">
+                        <h3 th:text="'Uživatel: ' + ${user.username}"></h3>
+                        <h3 th:text="'Body: ' + ${user.points}"></h3>
+                    </div>
+                </div>
+            </div>
+
+        </nav>
+    </header>
+</body>
+</html>

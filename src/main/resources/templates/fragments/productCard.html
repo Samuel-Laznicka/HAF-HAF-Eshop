@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="cz">
+<body>
+    <!--Karta produktu-->
+    <div th:fragment="productCard(product)" class="product-card-wrapper">
+        <img th:src="${product.categoryImage}" th:alt="${product.name}" class="product-image">
+
+        <div class="product-info">
+            <h3 th:text="${product.name}" class="product-name"></h3>
+            <p th:text="${product.description}" class="product-description"></p>
+
+            <!--Cena se slevou-->
+            <div class="price-section">
+
+                <!--Pokud je sleva-->
+                <span th:if="${product.onSale}"
+                      class="original-price"
+                      th:text="${product.price} + ' Kč'">
+                    </span>
+
+                <!--Finální cena (se slevou nebo bez)-->
+                <span class="final-price"
+                      th:text="${product.discountedPrice} + ' Kč'">
+                    </span>
+
+                <!--Label se slevou v %-->
+                <span th:if="${product.onSale}"
+                      class="discount-badge"
+                      th:text="'-' + ${product.discount} + '%'">
+                    </span>
+            </div>
+
+            <!--Skladem-->
+            <p class="stock-info">
+                    <span th:if="${product.stock > 0}"
+                          class="in-stock"
+                          th:text="'Skladem: ' + ${product.stock} + ' ks'">
+                    </span>
+                <span th:if="${product.stock <= 0}"
+                      class="out-of-stock">
+                        Není skladem
+                    </span>
+            </p>
+
+            <!--For Users-->
+            <div th:if="${user == null}">
+                <button class="btn-general" onclick="openPopup('login')">Přidat do košíku</button>
+            </div>
+
+            <div th:if="${user != null}">
+                <form th:action="@{/cart/add/{id}(id=${product.id})}" method="post">
+                    <button type="submit"
+                            class="btn-positive"
+                            th:disabled="${product.stock <= 0}">
+                        <span th:if="${product.stock > 0}">Přidat do košíku</span>
+                        <span th:if="${product.stock <= 0}">Vyprodáno</span>
+                    </button>
+                </form>
+            </div>
+
+            <!--Admin funkce-->
+            <div th:if="${user != null && user.role.name() == 'ADMIN'}" class="admin-actions">
+
+                <!--Upravit produkt - Admin-->
+                <button class="btn-general"
+                        th:data-id="${product.id}"
+                        th:data-name="${product.name}"
+                        th:data-price="${product.price}"
+                        th:data-stock="${product.stock}"
+                        th:data-discount="${product.discount}"
+                        onclick="openEditProductPopup(this.dataset.id, this.dataset.name, this.dataset.price, this.dataset.stock, this.dataset.discount)">
+                    Upravit
+                </button>
+
+                <!--Smazat produkt - Admin-->
+                <button class="btn-negative"
+                        th:data-id="${product.id}"
+                        onclick="openDeleteProductPopup(this.dataset.id)">
+                    Smazat
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

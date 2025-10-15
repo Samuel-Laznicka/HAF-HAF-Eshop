@@ -1,0 +1,148 @@
+/* === GENERAL THEME CONFIG === */
+:root {
+  --color-bg-page: #FFFCF2;
+  --color-bg2-page: #BBB5AA;
+  --color-bg-card: #CCC5B9;
+  --color-border: #403D39;
+  --color-text: #403D39;
+  --color-btn-positive: #3c6e71;
+  --color-btn-negative: #EB5E28;
+  --color-btn-secondary: #403D39;
+}
+
+/* === RESET & BASE === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  color: var(--color-text);
+  background-color: var(--color-bg-page);
+  width: 100%;
+}
+
+/* === LAYOUT === */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.empty {
+  text-align: center;
+  margin: 25px;
+}
+
+.card {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+}
+
+/* === TYPOGRAPHY === */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+p {
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+/* === BUTTONS === */
+button {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  color: #fff;
+}
+
+button:hover {
+  transform: scale(1.02);
+}
+
+/* Positive / Confirm buttons */
+.btn-positive {
+  background-color: var(--color-btn-positive);
+}
+.btn-positive:hover {
+  background-color: #2f5558;
+}
+
+/* Negative / Delete / Cancel buttons */
+.btn-negative {
+  background-color: var(--color-btn-negative);
+}
+.btn-negative:hover {
+  background-color: #cf511f;
+}
+
+/* Secondary / Neutral buttons */
+.btn-general {
+  background-color: var(--color-btn-secondary);
+}
+.btn-general:hover {
+  background-color: #2e2c29;
+}
+
+/* Add Button */
+#add {
+  display: block;
+  margin: 40px auto;
+  padding: 12px 24px;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Links */
+a {
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+a:hover {
+  color: var(--color-btn-positive);
+}
+.links {
+  margin: 25px;
+}
+
+/* Forms */
+input, select, textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  color: var(--color-text);
+  background-color: #fff;
+  font-size: 1rem;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--color-btn-positive);
+  box-shadow: 0 0 0 3px rgba(60, 110, 113, 0.25);
+}
+
+/* Logo */
+.logo img {
+  height: 70px;
+  width: auto;
+  transition: transform 0.2s ease;
+}
+.logo img:hover {
+  transform: scale(1.05);
+}

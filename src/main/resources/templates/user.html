@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/page :: page(~{::content})}">
+<body>
+    <!--Uživatelský profil-->
+    <th:block th:fragment="content">
+
+        <!--Úprava/smazání profilu a doplnění HAF bodů-->
+        <section class="specifications-section">
+            <div class="specifications-content">
+                <h2 th:text="'Můj profil: ' + ${user.username}"></h2>
+                <p>
+                    Zde můžete spravovat své údaje.
+                    <br>
+                    Sledovat již zakoupené objednávky.
+                    <br>
+                    Přidat si HAF body. Imaginární měnu, k nákupu zboží z obchodu.
+                </p>
+
+                <dl class="spec-list">
+                    <!--Edit user-->
+                    <div class="spec-item">
+                        <dt>Úprava profilu</dt>
+                        <dd>Možnost změnit všechny zadané údaje:</dd>
+                        <br>
+                        <button class="btn-positive" onclick="openPopup('edit-user')">Upravit profil</button>
+                    </div>
+
+                    <!--Add money-->
+                    <div class="spec-item">
+                        <dt>HAF body</dt>
+                        <dd>Možnost přidat body k nákupu v HAF HAF e-shopu:</dd>
+                        <br>
+                        <button class="btn-positive" onclick="openPopup('add-money')">Přičíst HAF body do peněženky</button>
+                    </div>
+
+                    <!--Delete user-->
+                    <div class="spec-item">
+                        <dt>Smazání profilu</dt>
+                        <dd>Permanentní smazání profilu a vašich dat:</dd>
+                        <br>
+                        <button class="btn-negative" onclick="openPopup('delete-user')">Smazat profil</button>
+                    </div>
+                </dl>
+            </div>
+        </section>
+
+        <!--Objednávky-->
+        <section>
+            <h2 class="order-h2">Moje objednávky</h2>
+
+            <!--Prázdné objednávky-->
+            <div class="order-list" th:if="${#lists.isEmpty(orders)}">
+                <h3>Zatím nemáte žádné objednávky</h3>
+                <p>Zajďete do našeho e-shopu a můžete si něco zakoupit</p>
+                <form action="/" method="get">
+                    <button type="submit" class="btn-positive">Přejít na E-shop</button>
+                </form>
+            </div>
+
+            <!--Orders-->
+            <ul class="order-list" th:unless="${#lists.isEmpty(orders)}">
+                <li th:each="order : ${orders}">
+                    <div>
+                        <div>
+                            <h4>Datum a číslo objednávky</h4>
+                            <p th:text="'Objednávka ' + ${order.createdAt}"></p>
+                            <p th:text="'Objednávka č.' + ${order.id} + ' z celého E-shopu'"></p>
+                        </div>
+                    </div>
+
+                    <div class="member-meta">
+                        <h4>Cena a počet produktů</h4>
+                        <p th:text="'Cena: ' + ${order.totalPrice} + ' bodů'"></p>
+                        <div>
+                            <p th:text="${order.orderItems.size()} + ' produktů'"></p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </th:block>
+</body>
+</html>

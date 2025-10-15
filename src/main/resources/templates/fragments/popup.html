@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="cz">
+    <body>
+    <!--Pop-up tělo-->
+        <div th:fragment="popup" id="popup-overlay" class="popup-overlay" style="display:none;">
+            <div class="popup-content">
+                <span class="popup-close" onclick="closePopup()">&times;</span>
+                <div id="popup-body"></div>
+            </div>
+        </div>
+    </body>
+</html>

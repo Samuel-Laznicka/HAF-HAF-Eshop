@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="cz">
+<body>
+
+    <!--Login-->
+    <form th:fragment="login" id="login" action="/login" method="post">
+        <h2>Přihlášení</h2>
+        <p>Přihlašte se pro plný zážitek a přístup ke všem funkcím webu.</p>
+
+        <h3>Uživatelské jméno:</h3>
+        <input type="text" name="username" placeholder="Vaše uživatelské jméno" required>
+        <h3>Heslo:</h3>
+        <input type="password" name="password" placeholder="Vaše heslo" required>
+
+        <button type="submit" class="btn-positive">Přihlásit se</button>
+        <button class="btn-general" onclick="openPopup('register')">Nemáte účet? Registrujte se!</button>
+        <button onclick="closePopup()" class="btn-general">Zrušit</button>
+    </form>
+
+    <!--Register-->
+    <form th:fragment="register" id="register" action="/register" method="post">
+        <h2>Registrace</h2>
+        <p>Vytvořte si vlastní uživatelský profil!</p>
+
+        <h3>Jméno:</h3>
+        <input type="text" name="username" placeholder="Petr" required>
+        <h3>E-mail:</h3>
+        <input type="email" name="email" placeholder="petr@seznam.cz" required>
+        <h3>Heslo:</h3>
+        <input type="password" name="password" placeholder="Silné unikátní heslo" required>
+
+        <button type="submit" class="btn-positive">Registrovat se</button>
+        <button class="general" onclick="openPopup('login')">Máte již účet? Přihlašte se!</button>
+        <button onclick="closePopup()" class="btn-general">Zrušit</button>
+    </form>
+
+    <!--Add product-->
+    <form th:fragment="add-product" id="add-product" action="/product/add" method="post">
+        <h2>Přidat nový produkt</h2>
+
+        <h3>Uveďte název produktu:</h3>
+        <input type="text" name="name" id="add-product-name" placeholder="Psí..." required>
+        <h3>Uveďte popis produktu:</h3>
+        <input type="text" name="description" id="add-product-description" placeholder="" required>
+        <h3>Nastavte cenu produktu:</h3>
+        <input type="number" name="price" id="add-product-price" placeholder="Cena" required step="0.01" min="0">
+        <h3>Kolik bylo naskladněno:</h3>
+        <input type="number" name="stock" id="add-product-stock" placeholder="Počet kusů" required min="0">
+        <h3>Vyberte kategorii produktu:</h3>
+        <select name="category" id="add-product-category" required>
+            <option value="">Vyberte kategorii</option>
+            <option value="FOOD">Jídlo</option>
+            <option value="TOYS">Hračky</option>
+            <option value="ACCESORIES">Doplňky</option>
+            <option value="PETS">Zvířata</option>
+        </select>
+        <h3>Nastavte slevu na produkt:</h3>
+        <p>Pouze pokud je produkt ve slevě!</p>
+        <input type="number" name="discount" id="add-product-discount" placeholder="Sleva (%)" min="0" max="100" value="0">
+
+        <button type="submit" class="btn-positive">Přidat produkt</button>
+        <button type="button" onclick="closePopup()" class="btn-general">Zrušit</button>
+    </form>
+
+    <!--Edit Product-->
+    <form th:fragment="edit-product" id="edit-product" method="post">
+        <h2>Upravit produkt</h2>
+
+        <input type="hidden" name="id" id="edit-product-id">
+        <h3>Jméno produktu:</h3>
+        <input type="text" name="name" id="edit-product-name" placeholder="Psí..." required>
+        <h3>Cena produktu:</h3>
+        <input type="number" name="price" id="edit-product-price" placeholder="250.00" required step="0.01">
+        <h3>Počet kusů skladem:</h3>
+        <input type="number" name="stock" id="edit-product-stock" placeholder="5" required>
+        <h3>Sleva produktu:</h3>
+        <input type="number" name="discount" id="edit-product-discount" placeholder="25 (%)" min="0" max="100">
+
+        <button type="submit" class="btn-positive">Uložit změny</button>
+        <button type="button" onclick="closePopup()" class="btn-general">Zrušit</button>
+    </form>
+
+    <!--Delete Product-->
+    <form th:fragment="delete-product" id="delete-product" method="post">
+        <h2>Smazat produkt?</h2>
+        <p>Opravdu chcete smazat tento produkt? Tuto akci nelze vrátit zpět.</p>
+
+        <input type="hidden" name="id" id="delete-product-id">
+
+        <button type="submit" class="btn-negative">Ano, smazat</button>
+        <button type="button" onclick="closePopup()" class="btn-general">Zrušit</button>
+    </form>
+
+    <!--Edit User-->
+    <form th:fragment="edit-user" id="edit-user" action="/user/edit" method="post">
+        <h2>Změnit údaje</h2>
+
+        <h3>Uživatelské jméno:</h3>
+        <input type="text" name="username" id="edit-username" placeholder="Nové uživatelské jméno">
+        <h3>E-mail:</h3>
+        <input type="email" name="email" id="edit-email" placeholder="Nový e-mail">
+        <h3>Heslo:</h3>
+        <input type="password" name="password" placeholder="Nové heslo">
+
+        <button type="submit" class="btn-positive">Uložit</button>
+        <button type="button" onclick="closePopup()" class="btn-general">Zrušit</button>
+    </form>
+
+    <!--Delete Account-->
+    <div th:fragment="delete-user" id="delete-user" action="/user/delete" method="post">
+        <h2>Smazat účet?</h2>
+
+        <p>Opravdu chcete smazat svůj účet? Všechna data budou nenávratně ztracena.</p>
+
+        <button type="submit" class="btn-negative">Ano, smazat účet</button>
+        <button type="button" onclick="closePopup()" class="btn-general">Zrušit</button>
+    </div>
+
+    <!--Add Money-->
+    <form th:fragment="add-money" id="add-money" action="/user/add-money" method="post">
+        <h2>Přidat HAF HAF body</h2>
+
+        <h3>Počet bodů k přidání:</h3>
+        <input type="number" name="amount" placeholder="Počet bodů" required min="5">
+
+        <button type="submit" class="btn-positive">Přidat</button>
+        <button onclick="closePopup()" class="btn-general">Zrušit</button>
+    </form>
+
+    <!--Payment Confirm-->
+        <form th:fragment="payment-confirm" id="payment-confirm" action="/order/create" method="post">
+            <h2>Potvrdit platbu</h2>
+            <p>Celková cena: <strong><span id="payment-total"></span> bodů</strong></p>
+            <p>Vaše dostupné body: <span id="user-balance"></span></p>
+
+            <button type="submit" class="btn-positive">Potvrdit a zaplatit</button>
+            <button onclick="closePopup()" class="btn-general">Zrušit</button>
+        </form>
+
+    <!--Delete Cart-->
+    <form th:fragment="delete-cart" id="delete-cart" action="/cart/clear" method="post">
+        <h2>Smazat košík?</h2>
+        <p>Opravdu chcete vyprázdnit celý košík? Tuto akci nelze vrátit zpět.</p>
+
+        <button type="submit" class="btn-negative">Ano, vyprázdnit košík</button>
+        <button type="button" onclick="closePopup()" class="btn-general">Zrušit</button>
+    </form>
+</body>
+</html>

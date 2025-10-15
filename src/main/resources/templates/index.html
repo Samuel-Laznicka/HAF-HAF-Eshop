@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/page :: page(~{::content})}">
+<body>
+    <!-- Eshop stránka -->
+    <th:block th:fragment="content">
+
+        <!--Intro sekce-->
+        <section class="intro-section">
+            <h1>HAF HAF E-shop</h1>
+            <p>
+                Vítejte na našem E-shopu <strong>HAF HAF</strong>, děkujeme za Vaši návštěvu.
+                <br>
+                Jak e-shop funguje? Jako každý internetový obchod, jen se nenakupuje za peníze ale <strong>HAF HAF body</strong>.
+                <br>
+                Prosím, užijte si Vaše nakupování na oko!
+            </p>
+        </section>
+
+        <!--Eshop sekce-->
+        <div th:replace="~{fragments/productsSection :: productsSection}"></div>
+
+        <!--Add product - Admin-->
+        <div th:if="${user != null && user.role.name() == 'ADMIN'}">
+            <button class="btn-positive" id="add" onclick="openAddProductPopup()">Přidat produkt</button>
+        </div>
+    </th:block>
+</body>
+</html>

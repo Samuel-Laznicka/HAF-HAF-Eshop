@@ -1,0 +1,142 @@
+.cart-page {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 1rem;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+}
+
+/* Header */
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.cart-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+/* Items */
+.cart-items ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cart-item {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item img {
+  width: 100px;
+  height: 100px;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  border: 1px solid var(--color-border);
+}
+
+.cart-item-info {
+  flex: 1;
+}
+
+.price {
+  font-weight: 600;
+}
+
+/* Summary */
+.cart-summary {
+  border-top: 1px solid var(--color-border);
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+}
+
+.cart-item {
+            display: flex;
+            gap: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            list-style: none;
+        }
+
+        .cart-item-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-top {
+            margin-bottom: 10px;
+        }
+
+        .cart-price-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 5px 0;
+            flex-wrap: wrap;
+        }
+
+        .cart-original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        .cart-price {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .cart-discount-badge {
+            background-color: #e74c3c;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .quantity {
+            color: #666;
+            margin: 5px 0;
+        }
+
+        .item-total {
+            font-weight: bold;
+            color: #27ae60;
+            font-size: 1.1em;
+            margin: 5px 0;
+        }
+
+        .details {
+            color: #666;
+            font-size: 0.9em;
+            margin: 10px 0;
+        }
+
+        .cart-item-bottom {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }

@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/page :: page(~{::content})}">
+<body>
+    <!--Košík-->
+    <th:block th:fragment="content">
+        <div th:replace="~{fragments/cartSection :: cartSection}"></div>
+    </th:block>
+</body>
+</html>

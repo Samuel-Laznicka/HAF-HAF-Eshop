@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="cz" xmlns:th="http://www.thymeleaf.org" th:fragment="page(content)">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Titul stránky-->
+    <title th:text="${pageTitle}"></title>
+
+    <!--CSS-->
+    <link rel="stylesheet" th:href="@{/css/{file}(file=${cssFile})}">
+    <link rel="stylesheet" href="/css/styleHeader.css">
+    <link rel="stylesheet" href="/css/styleGeneral.css">
+    <link rel="stylesheet" href="/css/stylePopup.css">
+</head>
+
+<body>
+    <!--Navigace-->
+    <div th:replace="~{fragments/navigation :: navigation}"></div>
+
+    <!--Obsah stránky-->
+    <div th:replace="${content}"></div>
+
+    <!--Pop-up-->
+    <div th:replace="~{fragments/popup :: popup}"></div>
+
+    <!--JavaScript-->
+    <script src="/js/script.js"></script>
+</body>
+</html>
