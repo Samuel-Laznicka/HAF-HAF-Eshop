@@ -26,7 +26,7 @@ Plugin: spring-boot-maven-plugin
 
 1. Naklonujte uložiště/repository:
     ```
-       git clone https://github.com/Samuel-Laznicka/eshop.git
+       git clone https://github.com/Samuel-Laznicka/HAF-HAF-Eshop
         cd eshop
     ```
 
